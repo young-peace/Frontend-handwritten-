@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <input type="submit" id="input">
+    <script type="text/javascript">
+        var btn = document.getElementById('input');
+        btn.addEventListener('click', debounce(submit, 2000, true), false);
+        function submit(e) {
+            console.log(1);
+        }
+        function debounce(fn, timer, triggleNow) {
+            var t = null;
+            return function () {
+                // 点击一次就重新开始计时
+                if (t) {
+                    clearTimeout(t);
+                }
+                // 第一次点击不延迟
+                if (triggleNow) {
+                    // 判断是否为第一次
+                    // 这里t为undefined时候也和null全等，因此这里将t写为boolean值
+                    var firstClick = !t;
+                    if (firstClick) {
+                        fn.apply(this, arguments);
+                    }
+                    t = setTimeout(() => {
+                        t = null;
+                    }, timer)
+                } else {
+                    t = setTimeout(() => {
+                        fn.apply(this, arguments)
+                    }, timer)
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

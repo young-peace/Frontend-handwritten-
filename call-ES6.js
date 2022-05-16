@@ -18,3 +18,4 @@ Function.prototype.myCall = function (thisArgs, ...args) {
 }
 obj = {name:'young'}
 foo.myCall(obj)
+
